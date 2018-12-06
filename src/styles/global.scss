@@ -1,0 +1,33 @@
+@import './settings/variables.scss';
+@import './utilities/mixins.scss';
+@import './generic/reset.css';
+@import './settings/fonts.scss';
+@import './settings/grid.scss';
+@import './features/wdyg-style.scss';
+@import '~react-redux-toastr/src/styles/index.scss';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $bg-base;
+  font-family: $roboto;
+}
+
+header,
+main {
+  width: 100%;
+  display: block;
+}
+
+header {
+  height: 42px;
+  background-color: $base-color;
+}
+
+h3 {
+  font-size: rem(16);
+  color: $black;
+  font-weight: $font-400;
+}

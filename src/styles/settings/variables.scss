@@ -1,0 +1,53 @@
+// Breakpoints
+$min-desktop-width: 1025px;
+$max-tablet-width: 1024px;
+$min-tablet-width: 768px;
+$max-smartphone-width: 767px;
+
+$font-300: 300;
+$font-400: 400;
+$font-700: 700;
+
+$font-big: 20px;
+$font-normal: 16px;
+$font-small: 12px;
+
+$normal: $font-400;
+$light: $font-300;
+$bold: $font-700;
+
+// Colors Wdyg
+$white: #fff;
+$black: #000;
+$base-color: #ff730d;
+$gray: #e9ebee;
+
+// Colors Heero
+$base-color: #009eff;
+
+$white: $white;
+$black: $black;
+$bg-base: $gray;
+
+// Grid
+$container-mobile: 100%;
+$container-tablet: 742px;
+$container-desktop: 1200px;
+
+$columns-mobile: 12;
+$columns-tablet: $columns-mobile;
+$columns-desktop: 24;
+
+$gutter-mobile: 8px;
+$gutter-tablet: 16px;
+$gutter-desktop: $gutter-tablet;
+
+$padding-grid-desktop: 40px;
+$padding-grid-mobile: 24px;
+$padding-grid-tablet: 35px;
+
+// Fonts
+$roboto: 'Roboto', sans-serif;
+$roboto-slab: 'Roboto Slab', serif;
+$sans-serif: $roboto;
+$serif: $roboto-slab;

@@ -1,0 +1,46 @@
+@import '../utilities/mixins.scss';
+@import '../settings/variables.scss';
+
+.wdyg_full-screen {
+  width: 100%;
+  height: 100%;
+
+  &.__flex-ai_center {
+    @include flex();
+
+    align-items: center;
+  }
+
+  &.__h-400 {
+    height: 400px;
+  }
+}
+
+h3,
+button {
+  &.__size {
+    &-small {
+      font-size: rem(12);
+    }
+
+    &-medium {
+      font-size: rem(18);
+    }
+
+    &-large {
+      font-size: rem(24);
+    }
+  }
+
+  &.__color {
+    &-base {
+      color: $base-color;
+    }
+  }
+
+  &.__weight {
+    &-bolder {
+      font-weight: bolder;
+    }
+  }
+}

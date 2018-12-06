@@ -1,0 +1,195 @@
+@function rem($pixels) {
+  @return #{$pixels / 16}rem;
+}
+
+@mixin transform($transforms) {
+  -moz-transform: $transforms;
+  -o-transform: $transforms;
+  -ms-transform: $transforms;
+  -webkit-transform: $transforms;
+  transform: $transforms;
+}
+
+@mixin border-radius($radius) {
+  -moz-border-radius: $radius;
+  -o-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
+  background-clip: padding-box;
+}
+
+@mixin rotate ($deg) {
+  @include transform(rotate(#{$deg}deg));
+}
+
+@mixin scale($scale) {
+  @include transform(scale($scale));
+}
+
+@mixin translate ($x, $y) {
+  @include transform(translate($x, $y));
+}
+
+@mixin skew ($x, $y) {
+  @include transform(skew(#{$x}deg, #{$y}deg));
+}
+
+@mixin simple-skew($deg) {
+  @include transform(skew(#{$deg}deg));
+}
+
+@mixin transform-origin ($origin) {
+  -moz-transform-origin: $origin;
+  -o-transform-origin: $origin;
+  -ms-transform-origin: $origin;
+  -webkit-transform-origin: $origin;
+  transform-origin: $origin;
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder { @content; }
+  &::-moz-placeholder { @content; }
+  &:-moz-placeholder { @content; }
+  &:-ms-input-placeholder { @content; }
+}
+
+@mixin opacity( $_value ) {
+  $value: $_value / 100;
+
+  -khtml-opacity: $value;
+  -moz-opacity: $value;
+  -ms-filter: ”alpha(opacity=$_value) ”;
+  filter: alpha(opacity=$_value);
+  filter: progid:dximagetransform.microsoft.alpha(opacity=$value);
+  opacity: $value;
+}
+
+@mixin background-opacity($color, $opacity: 0.3) {
+  background-color: $color; /* The Fallback */
+  background-color: rgba($color, $opacity);
+}
+
+@mixin flex() {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+// Grid
+@mixin clearfix {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$min-desktop-width}) {
+    @content;
+  }
+}
+
+@mixin tablet-and-desktop {
+  @media (min-width: #{$min-tablet-width}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$min-tablet-width}) and (max-width: #{$max-tablet-width}) {
+    @content;
+  }
+}
+
+@mixin smartphone-and-tablet {
+  @media (max-width: #{$max-tablet-width}) {
+    @content;
+  }
+}
+
+@mixin smartphone {
+  @media (max-width: #{$max-smartphone-width}) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: #{$max-smartphone-width}) {
+    @content;
+  }
+
+  @warn 'The mobile mixin is deprecated, use smartphone instead.';
+}
+
+@mixin container {
+  @include clearfix;
+
+  max-width: $container-mobile;
+  margin-left: auto;
+  margin-right: auto;
+  padding-right: 22px;
+  padding-left: 22px;
+
+  @include tablet {
+    max-width: $container-tablet;
+  }
+
+  @include desktop {
+    max-width: $container-desktop;
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+@mixin row {
+  @include clearfix;
+
+  margin-right: -$gutter-mobile / 2;
+  margin-left: -$gutter-mobile / 2;
+
+  @include tablet {
+    margin-right: -$gutter-tablet / 2;
+    margin-left: -$gutter-tablet / 2;
+  }
+
+  @include desktop {
+    margin-right: -$gutter-desktop / 2;
+    margin-left: -$gutter-desktop / 2;
+  }
+}
+
+@mixin col($span: 12, $columns: 12) {
+  float: left;
+  padding-right: $gutter-mobile / 2;
+  padding-left: $gutter-mobile / 2;
+  width: percentage($span / $columns);
+
+  @include tablet {
+    padding-right: $gutter-tablet / 2;
+    padding-left: $gutter-tablet / 2;
+  }
+
+  @include desktop {
+    padding-right: $gutter-desktop / 2;
+    padding-left: $gutter-desktop / 2;
+  }
+}
+
+@mixin col-push($span: 1, $columns: $columns-mobile) {
+  position: relative;
+  right: auto;
+  left: percentage($span / $columns);
+}
+
+@mixin col-pull($span: 1, $columns: $columns-mobile) {
+  position: relative;
+  right: percentage($span / $columns);
+  left: auto;
+}
+
+@mixin col-offset($span: 1, $columns: $columns-mobile) {
+  margin-left: percentage($span / $columns);
+}

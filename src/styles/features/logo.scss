@@ -1,0 +1,16 @@
+@import '../utilities/mixins.scss';
+@import '../settings//variables.scss';
+
+.wdyg_container-logo {
+  @include flex();
+
+  height: 42px;
+  align-items: center;
+
+  .logo {
+    font-size: rem(24);
+    font-family: $roboto;
+    font-weight: $font-700;
+    color: $white;
+  }
+}
