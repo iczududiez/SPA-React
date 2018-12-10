@@ -31,7 +31,6 @@ function loginReducer(state = INITIAL_STATE, action) {
           perfil: action.payload,
         }
     case LOGIN_SUCCESS:
-        debugger;
         return state;
     default:
       return state;

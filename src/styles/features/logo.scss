@@ -6,11 +6,13 @@
 
   height: 42px;
   align-items: center;
+  text-align: center;
 
   .logo {
     font-size: rem(24);
     font-family: $roboto;
     font-weight: $font-700;
     color: $white;
+    margin: 0 auto;
   }
 }

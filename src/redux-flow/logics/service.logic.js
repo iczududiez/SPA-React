@@ -9,7 +9,6 @@ export const LoadDataListTownHouseLogic = createLogic({
   type: LOAD_DATA_LIST_TOWN_HOUSE,
   latest: true,
   process({ requestUtil, action }, dispatch, done) {
-    debugger;
     action.success([
       { Id: 1, name: 'name_1' },
       { Id: 2, name: 'name_2' },
@@ -17,6 +16,7 @@ export const LoadDataListTownHouseLogic = createLogic({
       { Id: 4, name: 'name_4' },
       { Id: 5, name: 'name_5' },
     ]);
+    done();
     // requestUtil('http://heero.azurewebsites.net/Authentication', {
     //   method: 'POST',
     //   headers: {
@@ -33,7 +33,6 @@ export const LoadDataTownHouseLogic = createLogic({
   type: LOAD_DATA_TOWN_HOUSE,
   latest: true,
   process({ requestUtil, action }, dispatch, done) {
-    debugger;
     action.success([
       { Id: 1, name: 'name_1' },
       { Id: 2, name: 'name_2' },
@@ -41,6 +40,7 @@ export const LoadDataTownHouseLogic = createLogic({
       { Id: 4, name: 'name_4' },
       { Id: 5, name: 'name_5' },
     ]);
+    done();
     // requestUtil('http://heero.azurewebsites.net/Authentication', {
     //   method: 'POST',
     //   headers: {

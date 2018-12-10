@@ -51,8 +51,8 @@ class ListTownHouse extends Component {
 
     if (data.length) {
       return (
-        <ul>
-          {data.map(dataItem => this.renderListItem(dataItem))}
+        <ul className="heero_town-list" key="T-list">
+          {data.map(dataItem => (<li key={dataItem.id} className="heero_town-list-item">{dataItem.name}</li>))}
         </ul>
       );
     }
@@ -61,12 +61,13 @@ class ListTownHouse extends Component {
   }
 
   renderListItem = (data) => {
-    return (<li key={data.id}>{data.name}</li>);
+    return (<li key={data.id} className="heero_town-list-item">{data.name}</li>);
   }
 
   render() {
     return (
-      <div>
+      <div className="heero_town-container-list heero_content">
+        <h3>Condomínios</h3>
         {this.renderList()}
       </div>
     );
