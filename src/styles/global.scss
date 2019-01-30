@@ -11,7 +11,7 @@
 }
 
 body {
-  background-color: $bg-base;
+  background-color: $white;
   font-family: $roboto;
 }
 
@@ -21,8 +21,15 @@ main {
   display: block;
 }
 
+main {
+  border-radius: 5px 5px 5px 5px;
+  height: 50px;
+  margin-top: -5px;
+  background: #fff;
+}
+
 header {
-  height: 42px;
+  height: 80px;
   background-color: $base-color;
 }
 

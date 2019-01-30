@@ -1,11 +1,5 @@
-import { Logar } from './login.logic';
-import {
-  LoadDataListTownHouseLogic,
-  LoadDataTownHouseLogic,
-} from './service.logic';
+import LogarLogic from './login';
 
 export default [
-  Logar,
-  LoadDataListTownHouseLogic,
-  LoadDataTownHouseLogic,
+  LogarLogic,
 ];

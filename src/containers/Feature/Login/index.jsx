@@ -1,83 +1,143 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import FacebookLogin from 'react-facebook-login';
-import Card from '../../../components/Common/Card';
-import { setFbLoginData } from '../../../redux-flow/actions/login.actions';
+import { URL_LOGO_IMG } from './constants';
+
+import { logar } from '../../../redux-flow/actions/login';
+
+import './style.scss';
 
 class Login extends Component {
-  static propTypes = {
-    // states
-    // accessToken: PropTypes.string.isRequired,
-    // data_access_expiration_time: PropTypes.number.isRequired,
-    // email: PropTypes.string.isRequired,
-    // expiresIn: PropTypes.number.isRequired,
-    // id: PropTypes.string.isRequired,
-    // name: PropTypes.string.isRequired,
-    // picture: PropTypes.shape({}).isRequired,
-    // reauthorize_required_in: PropTypes.number.isRequired,
-    // signedRequest: PropTypes.string.isRequired,
-    userID: PropTypes.string.isRequired,
-    // actions
-    setFbLoginDataDispatch: PropTypes.func.isRequired,
-  }
-
   constructor(props) {
     super(props);
 
-    // Binders
-    this.handleResponse = this.handleResponse.bind(this);
+    this.state = {
+      focusLogin: false,
+      focusSenha: false,
+      loginBlurOrValue: false,
+      passBlurOrValue: false,
+      error: false,
+      viewPass: false,
+    };
+
+    // refs
+    this.email = null;
+    this.pass = null;
+
+    //binders
+    this.onFocusLogin = this.onFocusLogin.bind(this);
+    this.onBlurLogin = this.onBlurLogin.bind(this);
+    this.onFocusPass = this.onFocusPass.bind(this);
+    this.onBlurPass = this.onBlurPass.bind(this);
+    this.onLogar = this.onLogar.bind(this);
   }
 
-  componentWillUpdate(nextProps) {
-    const { userID, history } = nextProps;
-
-    if (userID) {
-      history.push('/events');
+  onFocusLogin = () => this.setState({ ...this.state, loginBlurOrValue: true, focusLogin: true });
+  onBlurLogin = () => {
+    if (!this.email.value.trim()) {
+      this.setState({ ...this.state, loginBlurOrValue: false, focusLogin: false });
+    } else {
+      this.setState({ ...this.state, focusLogin: false });
     }
   }
 
-  handleResponse = (response) => {
-    this.props.setFbLoginDataDispatch(response);
+  onFocusPass = () => this.setState({ ...this.state, passBlurOrValue: true, focusSenha: true });
+  onBlurPass = () => {
+    if (!this.email.value) {
+      this.setState({ ...this.state, passBlurOrValue: false, focusSenha: false });
+    } else {
+      this.setState({ ...this.state, focusSenha: false });
+    }
   }
 
-  renderHeader = () => (
-    <h3 className="h3 __color-base __weight-bolder __size-large">Login</h3>
-  )
+  onSeePass = () => this.setState({ ...this.state, viewPass: !this.state.viewPass });
+  onLogar = () => {
+    if (this.pass.value.trim() && this.email.value.trim()) {
+      this.props.logarDispatch({
+        data: {
+          password: this.pass.value,
+          userName: this.email.value,
+        },
+        success: () => {
+          debugger;
+        },
+        error: () => {
+          debugger;
+        },
+      })
+    } else {
+      debugger;
+      this.setState({
+        ...this.state,
+        error: true,
+      });
+    }
+  }
 
   render() {
+    const {
+      loginBlurOrValue,
+      passBlurOrValue,
+      focusSenha,
+      error,
+      focusLogin,
+      viewPass,
+    } = this.state;
+
     return (
-      <div className="wdyg_full-screen __flex-ai_center __h-400">
-        <Card
-          header={this.renderHeader}
-        >
-          <FacebookLogin
-            appId="186139758989534"
-            autoLoad
-            fields="name,email,picture"
-            callback={this.handleResponse}
-          />
-        </Card>
+      <div>
+        <div className="heero_logo-header">
+          <img src={URL_LOGO_IMG} />
+        </div>
+        <div className="heero_logo-main">
+          <p className="title">Login</p>
+          <p className="subtitle">Use o e-mail do condominio</p>
+          <div>
+            <fieldset className={`${focusLogin ? '--focus' : ''} ${error ? '--error' : ''}`}>
+              <legend>{loginBlurOrValue ? 'e-mail' : ''}</legend>
+              <input
+                ref={email => this.email = email }
+                type="text"
+                className="heero_logo-input"
+                placeholder={!loginBlurOrValue ? 'e-mail' : ''}
+                onFocus={this.onFocusLogin}
+                onBlur={this.onBlurLogin}
+              />
+            </fieldset>
+            <fieldset className={`${focusSenha ? '--focus' : ''} ${error ? '--error' : ''}`}>
+              <legend>{passBlurOrValue ? 'senha' : ''}</legend>
+              <input
+                ref={pass => this.pass = pass }
+                type={viewPass ? 'text' : 'password'}
+                className="heero_logo-input"
+                placeholder={!passBlurOrValue ? 'senha' : ''}
+                onFocus={this.onFocusPass}
+                onBlur={this.onBlurPass}
+              />
+              <span
+                className={`mdi ${viewPass ? 'mdi-eye-off' :'mdi-eye'}`}
+                onClick={this.onSeePass}
+              ></span>
+            </fieldset>
+          </div>
+          <div className="heero_logo-error" style={{ display: error ? 'block' : 'none' }}>
+            <p>E-mail e senha incompatíveis, tente novamente</p>
+          </div>
+          <div>
+            <button onClick={this.onLogar}>ENTRAR</button>
+          </div>
+        </div>
       </div>
     );
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  setFbLoginDataDispatch: payload => dispatch(setFbLoginData(payload)),
-});
 
-const mapStateToProps = ({ loginReducer }) => ({
-  accessToken: loginReducer.accessToken,
-  data_access_expiration_time: loginReducer.data_access_expiration_time,
-  email: loginReducer.email,
-  expiresIn: loginReducer.expiresIn,
-  id: loginReducer.id,
-  name: loginReducer.name,
-  picture: loginReducer.picture,
-  reauthorize_required_in: loginReducer.reauthorize_required_in,
-  signedRequest: loginReducer.signedRequest,
-  userID: loginReducer.userID,
+export const mapStateToProps = () => ({});
+
+export const mapDispatchToProps = dispatch => ({
+  // Parent
+  logarDispatch: params => dispatch(logar(params)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

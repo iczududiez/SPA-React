@@ -1,2 +1,0 @@
-export const LOAD_DATA_LIST_TOWN_HOUSE = 'service/LOAD_DATA_LIST_TOWN_HOUSE';
-export const LOAD_DATA_TOWN_HOUSE = 'service/LOAD_DATA_TOWN_HOUSE';

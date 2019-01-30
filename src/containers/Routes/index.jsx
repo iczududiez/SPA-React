@@ -1,16 +1,12 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router';
-import Login from '../Feature/_Login';
-import Events from '../Feature/Events';
-import ListTownHouse from '../Feature/ListTownHouse';
-import HealthFinancial from '../Feature/HealthFinancial';
+import Login from '../Feature/Login';
+import DashBoard from '../Feature/DashBoard';
 
 export default () => (
   <Switch>
     <Route exact path="/" component={Login} />
-    <Route exact path="/events" component={Events} />
-    <Route exact path="/l" component={ListTownHouse} />
-    <Route exact path="/h" component={HealthFinancial} />
+    <Route exact path="/dash" component={DashBoard} />
     <Redirect to="/" />
   </Switch>
 );
